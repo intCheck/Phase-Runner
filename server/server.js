@@ -7,9 +7,8 @@ var Path = require('path')
 /*
 * Server configurations
 */
-// the infamous 'leet' port ヽ(ﾟｰﾟ*ヽ)ヽ(*ﾟｰﾟ*)ﾉ(ﾉ*ﾟｰﾟ)ﾉ cuz we elite.
 const port = process.env.PORT || 1337;
-// Better to set options seperate, incase you need to change later
+
 const serverOptions = {
   name: 'Phaser',
   version: '1.0.0'
