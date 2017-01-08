@@ -1,5 +1,5 @@
 // Initialize Phaser, and create a 500px by 200px game
-var game = new Phaser.Game(800, 600, Phaser.AUTO);
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser platformer,');
 
 // Create our 'mainState' state that will contain the game
 var mainState = {
@@ -21,6 +21,8 @@ var mainState = {
         // Sets background color to blue
         game.stage.backgroundColor = '#3598db';
         
+        game.world.setBounds(0, 0, 1920, 1920, 'background');
+        
         // Start the Aracde physics system (for movements and collisions)
         game.physics.startSystem(Phaser.Physics.ARCADE);
         
@@ -34,20 +36,22 @@ var mainState = {
         this.player = game.add.sprite(70, 100, 'player');
         
         // Add gravity to make it fall
-        this.player.body.gravity.y = 600;
+        this.player.body.gravity.y = 300;
         
         this.walls = game.add.group();
         this.coins = game.add.group();
         this.enemies = game.add.group();
+        
+        game.camera.follow(this.player);
         
         // Design the level x = wall o = coin, ! = lava
         var level = [
             '                                                                   ',
             '!         !                                                        ',
             '!                 o                                                ',
-            '!         o           xxxx       xxxx                              ',
+            '!         o    xxxxxxxxxxx      xxxxxxxx                           ',
             '!                                                                  ',
-            '!     o        x                                                   ',
+            '!     o                                                            ',
             'xxxxxxxxxxxxxxxx     xxxxxxxxxxxx    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
             '               xooooox          xoooox                             ',
         ];
