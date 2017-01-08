@@ -1,6 +1,6 @@
 'use strict';
 
-const config = {
+module.exports = {
   canvasX: 800,
   canvasY: 800
-}
+};

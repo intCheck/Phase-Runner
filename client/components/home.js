@@ -3,8 +3,8 @@ const request = require('superagent');
 const Req = require('../models/requests');
 
 //Main Request Example controller
-const Home = module.exports;
-Home.controller = function () {
+const Overlay = module.exports;
+Overlay.controller = function () {
   var ctrl = this;
 
   // m.prop() is a getter/setter function. It allows you to set properties like a function, and
@@ -98,7 +98,7 @@ Home.controller = function () {
 // Notice how child elements in that div are in an array.
 // This way, it makes it easy to add to the array and keeps the order clean.
 // We will define our view components down below
-Home.view = function (ctrl, options) {
+Overlay.view = function (ctrl, options) {
 
     var view = m('div', [
       header(ctrl),
@@ -121,78 +121,8 @@ Home.view = function (ctrl, options) {
 //    3: refresh the page
 const header = function() {
   return m('div', [
-    m('h3', 'Welcome to the Campaign Manager'),
-    m('p', 'To test the different server routes, simply enter in the route and click the button')
+    m('h3', 'PHASER')
   ])
 };
 
-// This is the mithril verison of the the input field.
-// notice how it references the ctrl.response() prop getter/setter.
-// Initially, the ctrl.response() will evaluate to an empty string, but
-// after the GET/POST request that is setup, that value will change.
-// this.value refers to the input field itself. So this.value is the value inside the input box
-// we are also passing the ctrl into this function, because we want access to the controller functions and props.
-const field = function(ctrl) {
-  return m('div', [
-    m('a', 'http:/localhost:1337/'),
-    m('input', {
-      type: 'text',
-      style: {
-        width: "100px"
-      },
-      oninput: function(e) {
-      placeholder: "url",
-        e.preventDefault();
-        ctrl.url(this.value); }
-    }),
-    m('br'),
-    m('br'),
-    m('a', 'Response from server: ' + ctrl.response())
-  ])
-};
 
-// This is a div with 2 buttons. The buttons have an onclick function, that runs a function
-// defined in the controller which either runs a GET request, or a POST request.
-// by calling the function ctrl.url(), the getter/setter function, it will get the value stored in ctrl.url.
-// So by the way jabascript runs, ctrl.url will run first, giving the url entered in the input box, and then
-// will make a GET/POST request with the url.
-const buttons = function(ctrl) {
-  return m('div', [
-    m('button', {
-      style: {
-        width: "100px"
-      },
-      type: 'submit',
-      onclick: function(e){
-        e.preventDefault();
-        ctrl.getReq(ctrl.url());
-      }}, 'GET'),
-    m('button', {
-      type: 'submit',
-      style: {
-        width: "100px"
-      },
-      onclick: function(e){
-        e.preventDefault();
-        ctrl.postReq(ctrl.url());
-      }}, 'POST'),
-    m('button', {
-      type: 'submit',
-      style: {
-        width: "100px"
-      },
-      onclick: function(e){
-        e.preventDefault();
-        ctrl.putReq(ctrl.url());
-      }}, 'PUT'),
-    m('button', {
-      type: 'submit',
-      style: {
-        width: "100px"
-      },
-      onclick: function(e){
-        e.preventDefault();
-        ctrl.delReq(ctrl.url());
-      }}, 'DELETE'),
-  ])
-};

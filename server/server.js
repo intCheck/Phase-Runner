@@ -11,7 +11,7 @@ var Path = require('path')
 const port = process.env.PORT || 1337;
 // Better to set options seperate, incase you need to change later
 const serverOptions = {
-  name: 'Campagin_Manager',
+  name: 'Phaser',
   version: '1.0.0'
 };
 
@@ -24,7 +24,7 @@ const routes = express.Router();
 routes.use('/app-bundle.js', browserify('./client/app.js'));
 
 // Static assets (html, etc.)
-const assetFolder = Path.resolve(__dirname, '../client/public')
+const assetFolder = Path.resolve(__dirname, './client/public')
 routes.use(express.static(assetFolder))
 
 
@@ -43,9 +43,6 @@ app.use('/', routes)
 /**
 * Default Route to test our app
 */
-// app.get('/*', function(req, res, next) {
-//   res.send('.=^.^= This is The Extra =^.^=. ')
-// });
 
 app.use(function(req, res, next) {
   console.log(req.method + '' + req.url)
@@ -53,6 +50,6 @@ app.use(function(req, res, next) {
 
 
 app.listen(port, function () {
-  console.log(chalk.green(' .=^.^= app now meowing on port ' + port + ' =^.^=.'));
+  console.log(chalk.green(' Game Running on port: ' + port ));
 });
 
