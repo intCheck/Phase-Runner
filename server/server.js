@@ -33,7 +33,7 @@ routes.use(express.static(assetFolder))
 **********************/
 const app = express(serverOptions);
 
-const generateUserRoutes = require('./routes/users');
+const generateUserRoutes = require('./routes/game');
 generateUserRoutes(app);
 
 
