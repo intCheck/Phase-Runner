@@ -19,11 +19,12 @@ const footer = function() {
     style: { 
     	position: 'fixed',
     	bottom: '0',
-        backgroundColor: '#151515',
-        borderWidth: '10px',
-        borderColor:'#0F0C04',
-        borderSytle: 'groove',
-        width: '100%',
+    	left: '50%',
+		marginLeft: '-37.5%',
+	    backgroundColor: 'rgba(30,32,30, .4)',
+        outline:'5px inset rgba(89,89,89, .4)',
+	    border:'5px ridge rgba(105, 115, 105, .4)',
+        width: '80%',
      }
   },[
     m('div.container-fluid', [
@@ -36,7 +37,7 @@ const footer = function() {
             textAlign: 'center',
             textWeight: 'lighter',
             fontFamily: 'Papyrus, fantasy',
-            color: '#C3C2BF'
+            color: '#EFFBFF'
           }
         }, 'Welcome to the Phase Jam!')
         ])

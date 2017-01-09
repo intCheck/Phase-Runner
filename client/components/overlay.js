@@ -90,13 +90,14 @@ const header = function() {
   return m('div', [
     m('nav.navbar.navbar-default', {
       style:{
-        position: 'fixed',
-        top: '0',
-        backgroundColor: '#151515',
-        borderWidth: '10px',
-        borderColor:'#0F0C04',
-        borderSytle: 'groove',
-        width: '100%',
+      position: 'fixed',
+      top: '10px',
+      left: '50%',
+      marginLeft: '-37.5%',
+      backgroundColor: 'rgba(30,32,30, .4)',
+      outline:'5px inset rgba(89,89,89, .4)',
+      border:'5px ridge rgba(105, 115, 105, .4)',
+      width: '80%',
       }
     }, [
       m('div.container-fluid', [
@@ -113,7 +114,7 @@ const header = function() {
               textAlign: 'center',
               textWeight: 'bold',
               fontFamily: 'Papyrus, fantasy',
-              color: '#C3C2BF'
+              color: '#EFFBFF'
             }
           }, 'Phase Runner')
           ])
