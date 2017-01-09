@@ -1,4 +1,4 @@
-// Initialize Phaser, and create a 500px by 200px game
+// Initialize Phaser, and create a 800px by 600px game
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser platformer,');
 
 // Create our 'mainState' state that will contain the game
@@ -12,20 +12,53 @@ var mainState = {
         game.load.image('wall', 'assets/wall.png');
         game.load.image('enemy', 'assets/enemy.png');
         
+        //  Tilemaps are split into two parts: The actual map data (usually stored in a CSV or JSON file) 
+        //  and the tileset/s used to render the map.
+
+        //  Here we'll load the tilemap data. The first parameter is a unique key for the map data.
+
+        //  The second is a URL to the JSON file the map data is stored in. This is actually optional, you can pass the JSON object as the 3rd
+        //  parameter if you already have it loaded (maybe via a 3rd party source or pre-generated). In which case pass 'null' as the URL and
+        //  the JSON object as the 3rd parameter.
+
+        //  The final one tells Phaser the foramt of the map data, in this case it's a JSON file exported from the Tiled map editor.
+        //  This could be Phaser.Tilemap.CSV too.   
+        game.load.tilemap('area01, assets/tilemaps/maps/area01.json', null, Phaser.Tilemap.TILE_JSON);
+        
+        // Next we load the tileset. This is just an image, loaded in via the normal way we load images
+        game.load.image('wall', 'assets/wall.png');
+        
     },
 
     create: function() { 
         // This function is called after the preload function     
-        // Here we set up the game, display sprites, etc. 
-        
-        // Sets background color to blue
-        game.stage.backgroundColor = '#3598db';
-        
-        game.world.setBounds(0, 0, 1920, 1920, 'background');
+        // Here we set up the game, display sprites, etc.
         
         // Start the Aracde physics system (for movements and collisions)
         game.physics.startSystem(Phaser.Physics.ARCADE);
         
+        // Sets background color to blue
+        game.stage.backgroundColor = '#3598db';
+        
+        //Add the tilemap and tileset image. The first parameter in addTilesetImage
+        //is the name you gave the tilesheet when importing it into Tiled, the second
+        //is the key to the asset in Phaser
+        this.map = game.add.tilemap('tilemap');
+        this.map.addTilesetImage('wall', 'tiles');
+     
+        //Add both the background and ground layers. We won't be doing anything with the
+        //GroundLayer though
+        this.backgroundlayer = this.map.createLayer('BackgroundLayer');
+        this.groundLayer = this.map.createLayer('GroundLayer');
+     
+        //Before you can use the collide function you need to set what tiles can collide
+        this.map.setCollisionBetween(1, 100, true, 'GroundLayer');
+     
+        //Change the world size to match the size of this layer
+        this.groundLayer.resizeWorld();
+        
+        game.world.setBounds(0, 0, 1920, 1920, 'background');
+    
         // Add the physics engine to all game objects
         game.world.enableBody = true;
         
@@ -44,43 +77,6 @@ var mainState = {
         
         game.camera.follow(this.player);
         
-        // Design the level x = wall o = coin, ! = lava
-        var level = [
-            '                                                                   ',
-            '!         !                                                        ',
-            '!                 o                                                ',
-            '!         o    xxxxxxxxxxx      xxxxxxxx                           ',
-            '!                                                                  ',
-            '!     o                                                            ',
-            'xxxxxxxxxxxxxxxx     xxxxxxxxxxxx    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-            '               xooooox          xoooox                             ',
-        ];
-        
-        // Create the level by going through array
-        for (var i = 0; i < level.length; i++) {
-            for (var j = 0; j < level[i].length; j++) {
-                
-                // Create a wall and add it to the 'walls' group
-                if (level[i][j] == 'x') {
-                    var wall = game.add.sprite(25+25*j, 25+25*i, 'wall');
-                    this.walls.add(wall);
-                    wall.body.immovable = true;
-                }
-                
-                // Create a coin and add it to the 'coins' group
-                else if (level[i][j] == 'o') {
-                    var coin = game.add.sprite(25+25*j, 25+25*i, 'coin');
-                    this.coins.add(coin);
-                }
-                
-                // Create a enemy and add it to the 'enemies' group
-                else if (level[i][j] == '!') {
-                    var enemy = game.add.sprite(25+25*j, 25+25*i, 'enemy');
-                    this.enemies.add(enemy);
-                }
-            }
-        }
-        
     },
 
     update: function() {
@@ -89,6 +85,9 @@ var mainState = {
         
         // Make the player and the walls collide
         game.physics.arcade.collide(this.player, this.walls);
+        
+        // Make the player collide with the GroundLayer
+        game.physics.arcade.collide(this.player, this.GroundLayer);
         
         // Call the 'takeCoin' function when the plyaer takes a coin
         game.physics.arcade.overlap(this.player, this.coins, this.takeCoin, null, this);
