@@ -7,8 +7,7 @@ var Path = require('path')
 /*
 * Server configurations
 */
-// the infamous 'leet' port ヽ(ﾟｰﾟ*ヽ)ヽ(*ﾟｰﾟ*)ﾉ(ﾉ*ﾟｰﾟ)ﾉ cuz we elite.
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 8000;
 // Better to set options seperate, incase you need to change later
 const serverOptions = {
   name: 'Phaser',
@@ -26,7 +25,6 @@ routes.use('/app-bundle.js', browserify('./client/app.js'));
 // Static assets (html, etc.)
 const assetFolder = Path.resolve(__dirname, '../client/public')
 routes.use(express.static(assetFolder))
-
 
 /*********************\
 * SERVER SIDE ROUTING *

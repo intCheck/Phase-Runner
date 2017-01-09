@@ -3,10 +3,8 @@ const request = require('superagent');
 const Req = require('../models/requests');
 
 //Main Request Example controller
-const Overlay
- = module.exports;
-Overlay
-.controller = function () {
+const Overlay = module.exports;
+Overlay.controller = function () {
   var ctrl = this;
 
   ctrl.url = m.prop(null);
@@ -82,22 +80,52 @@ Overlay
 Overlay.view = function (ctrl, options) {
 
     var view = m('div', [
-      header(ctrl),
-      footer(ctrl)
+      header(ctrl)
     ]);
 
   return view;
 }
 
+// const header = function() {
+//   return m('div', [
+//     m('nav', ),
+//   ])
+// };
+
 const header = function() {
   return m('div', [
-    m('h3', 'TEMPORARY HEADER FOR GAME'),
-    m('p', 'THIS IS THE HEADER')
+    m('nav.navbar.navbar-default', {
+      style:{
+        position: 'fixed',
+        top: '0',
+        backgroundColor: '#151515',
+        borderWidth: '10px',
+        borderColor:'#0F0C04',
+        borderSytle: 'groove',
+        width: '100%',
+      }
+    }, [
+      m('div.container-fluid', [
+        m('div.navbar-header', {
+          style: {
+            width: '100%',
+            height: '70px',
+          }
+        }, [
+          m('h1', {
+            style: {
+              marginBottom: '50%',
+              display: 'block',
+              textAlign: 'center',
+              textWeight: 'bold',
+              fontFamily: 'Papyrus, fantasy',
+              color: '#C3C2BF'
+            }
+          }, 'Phase Runner')
+          ])
+        ])
+      ])
   ])
 };
 
-const footer = function() {
-  return m('div', [
-    m('h3', 'GAME GOES BETWEEN HERE AND HEADER, might just be some design'),
-  ])
-};
+
