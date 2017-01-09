@@ -86,12 +86,6 @@ Overlay.view = function (ctrl, options) {
   return view;
 }
 
-// const header = function() {
-//   return m('div', [
-//     m('nav', ),
-//   ])
-// };
-
 const header = function() {
   return m('div', [
     m('nav.navbar.navbar-default', {

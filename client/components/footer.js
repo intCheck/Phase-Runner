@@ -24,7 +24,6 @@ const footer = function() {
         borderColor:'#0F0C04',
         borderSytle: 'groove',
         width: '100%',
-       	// marginTop: '50%',
      }
   },[
     m('div.container-fluid', [
