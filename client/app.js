@@ -12,6 +12,6 @@ m.route.mode = "hash"
 // m.route.mode = 'pathname'
 
 m.route(document.getElementById('app'), "/", {
-    "/": require('./components/overlay')
+    "/": require('./views/main')
 });
 
