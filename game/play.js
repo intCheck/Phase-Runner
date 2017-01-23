@@ -28,21 +28,24 @@ var playState = {
         
         // creates game world
         this.createWorld();
+        
+        // if not desktop, add mobile controls
         if(!game.device.desktop) {
             this.addMobileInputs();
         }
         
+        //add coin sprite and physics
         this.coin = game.add.sprite(60,140,'coin');
         game.physics.arcade.enable(this.coin);
         this.coin.anchor.setTo(0.5,0.5);
         
+        // show score
         this.scoreLabel = game.add.text(30,30,'score: 0', {
             font: '18px Airla',
             fill: '#ffffff'
         });
         // Set game score if necessary
         game.global.score = 0;
-        
         
         // add enemies and enemy group
         this.enemies = game.add.group();
@@ -71,7 +74,7 @@ var playState = {
                 backgroundColor: '#000'
             });
             this.rotateLabel.anchor.setTo(0.5,0.5);
-            
+            // orientation of mile screen
             game.scale.onOrientationChange.add(this.orientationChange, this);
         }
     },
